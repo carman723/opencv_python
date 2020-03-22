@@ -7,9 +7,9 @@ altura_min=80 #Altura minima de retangulo
 
 offset=6 #Error permitido entre pixel  
 
-pos_linha=550 #Posicion de la linea de conteo
+pos_linea=550 #Posicion de la linea de conteo
 
-delay= 60 #FPS do vídeo
+delay= 60 #FPS del vídeo
 
 detec = []
 carros= 0
@@ -38,7 +38,7 @@ while True:
     dilatada = cv2.morphologyEx (dilatada, cv2. MORPH_CLOSE , kernel)
     
     img,contorno,h = cv2.findContours(dilatada,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
-    cv2.line(frame1, (25, pos_linha), (1200, pos_linha), (255,127,0), 3) 
+    cv2.line(frame1, (25, pos_linea), (1200, pos_linea), (255,127,0), 3) 
     for(i,c) in enumerate(contorno):
         (x,y,w,h) = cv2.boundingRect(c)
         validar_contorno = (w >= largura_min) and (h >= altura_min)
@@ -51,9 +51,9 @@ while True:
         cv2.circle(frame1, centro, 4, (0, 0,255), -1)
 
         for (x,y) in detec:
-            if y<(pos_linha+offset) and y>(pos_linha-offset):
+            if y<(pos_linea+offset) and y>(pos_linea-offset):
                 carros+=1
-                cv2.line(frame1, (25, pos_linha), (1200, pos_linha), (0,127,255), 3)  
+                cv2.line(frame1, (25, pos_linea), (1200, pos_linea), (0,127,255), 3)  
                 detec.remove((x,y))
                 print("Carros detectados hasta el momento: "+str(carros))        
        
